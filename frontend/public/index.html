@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐱 Registro de Gatitos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F7F3EE;
+      --warm:    #EDE5D8;
+      --orange:  #D4622A;
+      --peach:   #F2A07B;
+      --brown:   #3B2718;
+      --mid:     #7A5C45;
+      --white:   #FFFFFF;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--brown);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--bg);
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Lora', serif;
+      font-size: 3rem;
+      line-height: 1.1;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 340px;
+      margin-bottom: 32px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      border: 1.5px solid var(--brown);
+      padding: 11px 28px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--brown);
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.2s, color 0.2s;
+      width: fit-content;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    .hero-btn:hover {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    /* Imagen del hero — reemplaza el src por la foto de tu gato! */
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--warm);
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--mid);
+      font-size: 0.85rem;
+    }
+    .hero-image-placeholder .paw { font-size: 64px; }
+
+    /* ── CONTENIDO ── */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 20px rgba(59,39,24,0.08);
+    }
+    .form-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      color: var(--brown);
+    }
+
+    label {
+      display: block;
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #E2D8CE;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--brown);
+      background: var(--bg);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border-color: var(--peach);
+      box-shadow: 0 0 0 3px rgba(242,160,123,0.18);
+      background: var(--white);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 13px;
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover  { background: #B8501F; }
+    .btn-submit:active { transform: scale(0.98); }
+
+    /* ── LISTA ── */
+    .list-wrap h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      color: var(--brown);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge {
+      background: var(--warm);
+      color: var(--mid);
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .cat-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 12px rgba(59,39,24,0.07);
+      animation: up 0.3s ease both;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59,39,24,0.11);
+    }
+    @keyframes up {
+      from { opacity:0; transform: translateY(14px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    .avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--warm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .cat-info { flex: 1; min-width: 0; }
+    .cat-name {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+    .cat-age {
+      font-size: 0.8rem;
+      color: var(--mid);
+      margin-top: 2px;
+    }
+    .cat-apodo {
+      display: inline-block;
+      background: #FEF0E8;
+      color: var(--orange);
+      font-size: 0.73rem;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-top: 5px;
+    }
+
+    .btn-del {
+      background: none;
+      border: 1.5px solid #E2D8CE;
+      border-radius: 8px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--mid);
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-del:hover { background: #FEF0E8; border-color: var(--peach); color: var(--orange); }
+
+    /* ── EMPTY ── */
+    .empty {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--mid);
+    }
+    .empty .big { font-size: 52px; margin-bottom: 10px; }
+    .empty p { font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--brown);
+      color: var(--bg);
+      padding: 11px 24px;
+      border-radius: 40px;
+      font-size: 0.88rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+      transition: transform 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 999;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: 260px; }
+      .hero-title { font-size: 2.2rem; }
+      .content { grid-template-columns: 1fr; padding: 32px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-label">Bienvenido al registro</p>
+    <h1 class="hero-title">Registro<br>de Gatitos</h1>
+    <p class="hero-desc">
+      Lleva el control de todos tus peludos favoritos.
+      Agrega su nombre, edad y apodo especial. 🐾
+    </p>
+    <button class="hero-btn" onclick="document.getElementById('nombre').focus()">
+      Registrar gatito
+    </button>
+  </div>
+
+  <div class="hero-image">
+    <!--
+      PARA CAMBIAR LA IMAGEN:
+      Reemplaza todo el bloque de abajo por:
+      <img src="foto-de-tu-gato.jpg" alt="Mi gatito">
+      Y pon la foto en la carpeta frontend/public/
+    -->
+    <div class="hero-image-placeholder">
+      <div class="paw">🐱</div>
+      <span>Reemplaza esto con la foto<br>de tu gatito aquí</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENIDO -->
+<div class="content">
+
+  <!-- Formulario -->
+  <div class="form-card">
+    <h2>Agregar gatito</h2>
+
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" placeholder="Ej: Michi" autocomplete="off">
+
+    <label for="edad">Edad (años)</label>
+    <input type="number" id="edad" placeholder="Ej: 2" min="0" max="30">
+
+    <label for="apodo">Apodo</label>
+    <input type="text" id="apodo" placeholder="Ej: El Terrorista" autocomplete="off">
+
+    <button class="btn-submit" onclick="agregarGato()">🐱 Registrar gatito</button>
+  </div>
+
+  <!-- Lista -->
+  <div class="list-wrap">
+    <h2>
+      Gatitos registrados
+      <span class="badge" id="contador">0 gatos</span>
+    </h2>
+    <div id="lista"></div>
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+  const API    = '/api/cats';
+  const EMOJIS = ['😺','😸','😹','😻','🐱','😼','🙀','😽'];
+
+  function emo(id) { return EMOJIS[id % EMOJIS.length]; }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  async function cargar() {
+    try {
+      const gatos = await fetch(API).then(r => r.json());
+      const lista = document.getElementById('lista');
+      const badge = document.getElementById('contador');
+      badge.textContent = gatos.length === 1 ? '1 gato' : `${gatos.length} gatos`;
+
+      if (!gatos.length) {
+        lista.innerHTML = `
+          <div class="empty">
+            <div class="big">🐱</div>
+            <p>Aún no hay gatitos registrados.<br>¡Agrega el primero!</p>
+          </div>`;
+        return;
+      }
+
+      lista.innerHTML = gatos.map(g => `
+        <div class="cat-card">
+          <div class="avatar">${emo(g.id)}</div>
+          <div class="cat-info">
+            <div class="cat-name">${g.nombre}</div>
+            <div class="cat-age">${g.edad} ${g.edad == 1 ? 'año' : 'años'}</div>
+            <span class="cat-apodo">"${g.apodo}"</span>
+          </div>
+          <button class="btn-del" onclick="eliminar(${g.id})">🗑</button>
+        </div>
+      `).join('');
+    } catch {
+      document.getElementById('lista').innerHTML =
+        '<div class="empty"><p>⚠️ No se pudo conectar con el servidor.</p></div>';
+    }
+  }
+
+  async function agregarGato() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const edad   = document.getElementById('edad').value.trim();
+    const apodo  = document.getElementById('apodo').value.trim();
+    if (!nombre || !edad || !apodo) { toast('⚠️ Completa todos los campos'); return; }
+
+    await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, edad: parseInt(edad), apodo })
+    });
+
+    document.getElementById('nombre').value = '';
+    document.getElementById('edad').value   = '';
+    document.getElementById('apodo').value  = '';
+    toast(`🐱 ¡${nombre} registrado!`);
+    cargar();
+  }
+
+  async function eliminar(id) {
+    await fetch(`${API}/${id}`, { method: 'DELETE' });
+    toast('🗑 Gatito eliminado');
+    cargar();
+  }
+
+  cargar();
+</script>
+</body>
+</html>
