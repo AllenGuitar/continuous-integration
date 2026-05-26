@@ -8,10 +8,10 @@ app.use(express.json());
 let gatos = [];
 let nextId = 1;
 
-// GET /cats → retorna todos los gatos
+// trae los gatitos registrados
 app.get('/cats', (req, res) => res.json(gatos));
 
-// POST /cats → registra un gato nuevo
+// registro de nuevos gatitos
 app.post('/cats', (req, res) => {
   const { nombre, edad, apodo } = req.body;
   const gato = { id: nextId++, nombre, edad, apodo };
@@ -19,11 +19,10 @@ app.post('/cats', (req, res) => {
   res.status(201).json(gato);
 });
 
-// DELETE /cats/:id → elimina un gato
 app.delete('/cats/:id', (req, res) => {
   const id = parseInt(req.params.id);
   gatos = gatos.filter(g => g.id !== id);
   res.json({ ok: true });
 });
 
-app.listen(3000, () => console.log('Backend de gatitos corriendo en puerto 3000 🐱'));
+app.listen(3000, () => console.log('Backend de gatitos corriendo en puerto 3000'));
