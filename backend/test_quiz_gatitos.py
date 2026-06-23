@@ -6,7 +6,7 @@ def test_frap_correcto():
     assert verificar_respuesta(1, "frenetic random activity period") == True
 
 def test_frap_incorrecto():
-    assert verificar_respuesta(1, "free runing animal period") == True
+    assert verificar_respuesta(1, "false random animal period") == False
 
 def test_ignora_mayusculas():
     assert verificar_respuesta(1, "Frenetic Random Activity Period") == True
