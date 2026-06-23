@@ -44,3 +44,6 @@ def nivel_michi(puntaje):
         return "Aprendiz"
     else:
         return "Necesitas pasar más tiempo con michis :("
+
+def obtener_total_preguntas():
+    return len(PREGUNCAT)
