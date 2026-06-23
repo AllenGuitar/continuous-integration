@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
+      - name: Clonar repo
         uses: actions/checkout@v4
 
-      - name: Configurar Python
+      - name: Configurar Py
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -22,5 +22,5 @@ jobs:
       - name: Instalar dependencias
         run: pip install pytest
 
-      - name: Ejecutar pruebas
-        run: pytest backend/test_operaciones.py -v
+      - name: Ejecutar el testeo
+        run: pytest backend/test_quiz_gatitos.py -v
